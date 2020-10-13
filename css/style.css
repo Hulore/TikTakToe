@@ -22,6 +22,7 @@ main {
   justify-content: space-around;
 }
 .tttBlock {
+  transition-property: none;
   transition-duration: 300ms;
   min-width: 110px;
   min-height: 110px;

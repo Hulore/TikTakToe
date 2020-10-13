@@ -73,20 +73,27 @@ var botTern = function () {
 var TsBlockaddListener = function (tBlock) {
   tBlock.addEventListener("click", function () {
     //Назначение блоку соответсвующего знака
-    if (side === "cross") {
-      tBlock.classList.remove("oTern");
-      tBlock.classList.add("xTern");
-    } else if (side === "circle") {
-      tBlock.classList.remove("xTern");
-      tBlock.classList.add("oTern");
-    } else {
-      console.log("Ошибка");
-    }
-    //Реагирующий бот
-    if (antiside == "cross" || antiside == "circle") {
-      botTern();
-    } else {
-      console.log("Ошибка");
+    //Перед этим проверка, является ли блок пустым
+    if (
+      !tBlock.classList.contains("oTern") &&
+      !tBlock.classList.contains("xTern")
+    ) {
+      if (side === "cross") {
+        tBlock.classList.remove("oTern");
+        tBlock.classList.add("xTern");
+      } else if (side === "circle") {
+        tBlock.classList.remove("xTern");
+        tBlock.classList.add("oTern");
+      } else {
+        console.log("Ошибка");
+      }
+
+      //Реагирующий бот
+      if (antiside == "cross" || antiside == "circle") {
+        botTern();
+      } else {
+        console.log("Ошибка");
+      }
     }
   });
 };
