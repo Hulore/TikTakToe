@@ -83,7 +83,11 @@ var TsBlockaddListener = function (tBlock) {
       console.log("Ошибка");
     }
     //Реагирующий бот
-    botTern();
+    if (antiside == "cross" || antiside == "circle") {
+      botTern();
+    } else {
+      console.log("Ошибка");
+    }
   });
 };
 for (let i = 0; i < TsBlocks.length; i++) {
