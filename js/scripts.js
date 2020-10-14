@@ -7,16 +7,21 @@ var side;
 var antiside;
 //Создаём листенеры для кнопок выбора сторон
 crossSide.addEventListener("click", function () {
-  circleSide.classList.remove("background-choose");
-  crossSide.classList.add("background-choose");
-  side = "cross";
-  antiside = "circle";
+  if (!side) {
+    circleSide.classList.remove("background-choose");
+    crossSide.classList.add("background-choose");
+    side = "cross";
+    antiside = "circle";
+  }
 });
 circleSide.addEventListener("click", function () {
-  crossSide.classList.remove("background-choose");
-  circleSide.classList.add("background-choose");
-  side = "circle";
-  antiside = "cross";
+  if (!side) {
+    crossSide.classList.remove("background-choose");
+    circleSide.classList.add("background-choose");
+    side = "circle";
+    antiside = "cross";
+    botTern();
+  }
 });
 //Функция вставки знака бота
 var setBotChar = function (numBlock) {
@@ -158,6 +163,7 @@ var halfmindTern = function (logicArray) {
     return false;
   }
 };
+//Ход бота
 var botTern = function () {
   //Создаем массив, который будет видеть бот
   let logicArrayBot = [];
