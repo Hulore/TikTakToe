@@ -2,8 +2,11 @@
 var TsBlocks = document.querySelectorAll(".tttBlock");
 var crossSide = document.querySelector(".crossSide");
 var circleSide = document.querySelector(".circleSide");
+var easyDif = document.querySelector(".easyDif");
+var hardDif = document.querySelector(".hardDif");
 //Переменная для стороны
 var side;
+var difficult;
 var antiside;
 //Создаём листенеры для кнопок выбора сторон
 crossSide.addEventListener("click", function () {
@@ -20,7 +23,30 @@ circleSide.addEventListener("click", function () {
     circleSide.classList.add("background-choose");
     side = "circle";
     antiside = "cross";
-    botTern();
+    if (difficult) {
+      botTernHard();
+    }
+  }
+});
+//Создаем листенеры для кнопок выбора сложности
+easyDif.addEventListener("click", function () {
+  if (!difficult) {
+    hardDif.classList.remove("background-choose");
+    easyDif.classList.add("background-choose");
+    difficult = "easy";
+    if (side == "circle") {
+      botTernHard();
+    }
+  }
+});
+hardDif.addEventListener("click", function () {
+  if (!difficult) {
+    easyDif.classList.remove("background-choose");
+    hardDif.classList.add("background-choose");
+    difficult = "hard";
+    if (side == "circle") {
+      botTernHard();
+    }
   }
 });
 //Функция вставки знака бота
@@ -163,8 +189,8 @@ var halfmindTern = function (logicArray) {
     return false;
   }
 };
-//Ход бота
-var botTern = function () {
+//Ход сложного бота
+var botTernHard = function () {
   //Создаем массив, который будет видеть бот
   let logicArrayBot = [];
   let freeslots = 0;
@@ -207,6 +233,45 @@ var botTern = function () {
     }
   }
 };
+// Ход легкого бота
+var botTernEasy = function () {
+  //Создаем массив, который будет видеть бот
+  let logicArrayBot = [];
+  let freeslots = 0;
+  //Он получает "+" - если клетка занята его стороной
+  //"-" - если не его стороной
+  //"0" - если клетка пуста
+  // Генерируем массив значений блока клеток
+  for (let i = 0; i < TsBlocks.length; i++) {
+    if (TsBlocks[i].classList.contains("oTern") && antiside == "circle") {
+      logicArrayBot[i] = "+";
+    } else if (TsBlocks[i].classList.contains("xTern") && antiside == "cross") {
+      logicArrayBot[i] = "+";
+    } else if (TsBlocks[i].classList.contains("oTern") && antiside == "cross") {
+      logicArrayBot[i] = "-";
+    } else if (
+      TsBlocks[i].classList.contains("xTern") &&
+      antiside == "circle"
+    ) {
+      logicArrayBot[i] = "-";
+    } else {
+      logicArrayBot[i] = "0";
+      freeslots += 1;
+    }
+  }
+  if (freeslots != 0) {
+    let turnTrue = false;
+    while (turnTrue != true) {
+      //рандомный ход
+      if (turnTrue == false) {
+        turnTrue = randomTern(logicArrayBot);
+      }
+      if (turnTrue) {
+        console.log("Рандомный ход");
+      }
+    }
+  }
+};
 // Функция замыкания, принимает блок и сторону за которую играет игрок
 var TsBlockaddListener = function (tBlock) {
   tBlock.addEventListener("click", function () {
@@ -216,10 +281,10 @@ var TsBlockaddListener = function (tBlock) {
       !tBlock.classList.contains("oTern") &&
       !tBlock.classList.contains("xTern")
     ) {
-      if (side === "cross") {
+      if (side === "cross" && difficult) {
         tBlock.classList.remove("oTern");
         tBlock.classList.add("xTern");
-      } else if (side === "circle") {
+      } else if (side === "circle" && difficult) {
         tBlock.classList.remove("xTern");
         tBlock.classList.add("oTern");
       } else {
@@ -228,7 +293,11 @@ var TsBlockaddListener = function (tBlock) {
 
       //Реагирующий бот
       if (antiside == "cross" || antiside == "circle") {
-        botTern();
+        if (difficult == "hard") {
+          botTernHard();
+        } else if (difficult == "easy") {
+          botTernEasy();
+        }
       } else {
         console.log("Ошибка");
       }
