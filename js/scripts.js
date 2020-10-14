@@ -8,6 +8,11 @@ var hardDif = document.querySelector(".hardDif");
 var side;
 var difficult;
 var antiside;
+var winPlayer;
+//Фунция для целых случайных чисел
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
 //Создаём листенеры для кнопок выбора сторон
 crossSide.addEventListener("click", function () {
   if (!side) {
@@ -57,10 +62,6 @@ var setBotChar = function (numBlock) {
     TsBlocks[numBlock].classList.add("oTern");
   }
 };
-//Фунция для целых случайных чисел
-function getRandomInt(max) {
-  return Math.floor(Math.random() * Math.floor(max));
-}
 //Функция рандомного хода
 var randomTern = function (logicArray) {
   let testTernBot = getRandomInt(9);
@@ -71,7 +72,7 @@ var randomTern = function (logicArray) {
     return false;
   }
 };
-//Функция перебора 3-ел-ов
+//Функция перебора 3-ел-ов для сложного хода
 var tripleReseach = function (
   num1,
   idElement1,
@@ -176,7 +177,6 @@ var halfmindTern = function (logicArray) {
       if (miniSuperTurnArray[i] > -1 && miniSuperTurnArray[i] < 9) {
         miniSuperTurn = miniSuperTurnArray[i];
       } else {
-        console.log(miniSuperTurnArray[i]);
         miniSuperTurn = miniSuperTurnArray[i].substring(1);
         break;
       }
@@ -215,20 +215,22 @@ var botTernHard = function () {
       freeslots += 1;
     }
   }
-  if (freeslots != 0) {
+  if (freeslots <= 5) {
+    winPlayer = winDetected(logicArrayBot);
+    console.log(winPlayer);
+  }
+  if (freeslots != 0 && !winPlayer) {
     let turnTrue = false;
 
     while (turnTrue != true) {
       turnTrue = halfmindTern(logicArrayBot);
       if (turnTrue) {
-        console.log("Умный ход");
       }
       //рандомный ход
       if (turnTrue == false) {
         turnTrue = randomTern(logicArrayBot);
       }
       if (turnTrue) {
-        console.log("Рандомный ход");
       }
     }
   }
@@ -259,18 +261,115 @@ var botTernEasy = function () {
       freeslots += 1;
     }
   }
-  if (freeslots != 0) {
+  if (freeslots <= 5) {
+    winPlayer = winDetected(logicArrayBot);
+    console.log(winPlayer);
+  }
+  if (freeslots != 0 && !winPlayer) {
     let turnTrue = false;
     while (turnTrue != true) {
       //рандомный ход
       if (turnTrue == false) {
         turnTrue = randomTern(logicArrayBot);
       }
-      if (turnTrue) {
-        console.log("Рандомный ход");
-      }
     }
   }
+};
+//Функция перебора 3-ел-ов для победы
+var tripleReseachWin = function (
+  num1,
+  idElement1,
+  num2,
+  idElement2,
+  num3,
+  idElement3
+) {
+  if (num1 == num2 && num1 == num3 && num1 != 0) {
+    if (num1 == "-") {
+      return "win";
+    } else {
+      winPlayer = false;
+      return "lose";
+    }
+  }
+  return false;
+};
+//Функция детекта победы
+var winDetected = function (logicArray) {
+  let winnerDetectedArray = [];
+  let winnerDetected = false;
+  //Создание массива
+  winnerDetectedArray[0] = tripleReseachWin(
+    logicArray[0],
+    0,
+    logicArray[1],
+    1,
+    logicArray[2],
+    2
+  );
+  winnerDetectedArray[1] = tripleReseachWin(
+    logicArray[3],
+    3,
+    logicArray[4],
+    4,
+    logicArray[5],
+    5
+  );
+  winnerDetectedArray[2] = tripleReseachWin(
+    logicArray[6],
+    6,
+    logicArray[7],
+    7,
+    logicArray[8],
+    8
+  );
+  winnerDetectedArray[3] = tripleReseachWin(
+    logicArray[0],
+    0,
+    logicArray[3],
+    3,
+    logicArray[6],
+    6
+  );
+  winnerDetectedArray[4] = tripleReseachWin(
+    logicArray[1],
+    1,
+    logicArray[4],
+    4,
+    logicArray[7],
+    7
+  );
+  winnerDetectedArray[5] = tripleReseachWin(
+    logicArray[2],
+    2,
+    logicArray[5],
+    5,
+    logicArray[8],
+    8
+  );
+  winnerDetectedArray[6] = tripleReseachWin(
+    logicArray[0],
+    0,
+    logicArray[4],
+    4,
+    logicArray[8],
+    8
+  );
+  winnerDetectedArray[7] = tripleReseachWin(
+    logicArray[2],
+    2,
+    logicArray[4],
+    4,
+    logicArray[6],
+    6
+  );
+  for (let i = 0; i < winnerDetectedArray.length; i++) {
+    if (winnerDetectedArray[i] != false) {
+      winnerDetected = winnerDetectedArray[i];
+      return winnerDetected;
+    }
+  }
+  return false;
 };
 // Функция замыкания, принимает блок и сторону за которую играет игрок
 var TsBlockaddListener = function (tBlock) {
@@ -281,7 +380,7 @@ var TsBlockaddListener = function (tBlock) {
       !tBlock.classList.contains("oTern") &&
       !tBlock.classList.contains("xTern")
     ) {
-      if (side === "cross" && difficult) {
+      if (side === "cross" && difficult && !winPlayer) {
         tBlock.classList.remove("oTern");
         tBlock.classList.add("xTern");
       } else if (side === "circle" && difficult) {
