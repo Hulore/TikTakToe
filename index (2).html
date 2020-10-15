@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>TikTakToe</title>
+    <meta name="description" content="TikTakToe" />
+    <meta name="author" content="Hulore" />
+    <link rel="shortcut icon" href="icons/metaIcon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <header>
+      <div class="gameTitle">TikTakToe</div>
+    </header>
+    <main>
+      <div class="b-popup">
+        <div class="b-popup-content">
+          <div class="login-title">Регистрация/авторизация</div>
+          <form action="gamepage.html" method="POST" name="form-login">
+            <div id="" class="form-data">
+              <div id="" class="form-data-block login-block">
+                <p>Логин:</p>
+                <label for="login"></label>
+                <input
+                  type="text"
+                  id="login"
+                  name="login"
+                  placeholder="Введите логин"
+                />
+              </div>
+              <div id="" class="form-data-block password-block">
+                <p>Пароль:</p>
+                <label for="password"></label>
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Введите пароль"
+                  id="password"
+                />
+              </div>
+              <input type="submit" value="Войти" />
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="asidePanelLeft">
+        <div id="" class="caption">Выбери сторону</div>
+        <div id="" class="choiceSide">
+          <div id="" class="ofSide crossSide">Крестики</div>
+          <div id="" class="ofSide circleSide">Нолики</div>
+        </div>
+        <div id="" class="caption">Выбери сложность</div>
+        <div id="" class="choiceSide">
+          <div id="" class="ofSide easyDif">Easy</div>
+          <div id="" class="ofSide hardDif">Hard</div>
+        </div>
+      </div>
+      <div class="blockOfGame">
+        <div class="tttBlock"></div>
+        <div class="tttBlock"></div>
+        <div class="tttBlock"></div>
+        <div class="tttBlock"></div>
+        <div class="tttBlock"></div>
+        <div class="tttBlock"></div>
+        <div class="tttBlock"></div>
+        <div class="tttBlock"></div>
+        <div class="tttBlock"></div>
+      </div>
+      <div class="asidePanelRight"></div>
+    </main>
+    <footer></footer>
+  </body>
+</html>

@@ -9,6 +9,9 @@ var side;
 var difficult;
 var antiside;
 var winPlayer;
+var freeslots = 0;
+//Получение данных из формы регистрации
+
 //Фунция для целых случайных чисел
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
@@ -54,6 +57,29 @@ hardDif.addEventListener("click", function () {
     }
   }
 });
+//Функция получения массива значений крестиков и нольков
+var getValueTable = function () {
+  freeslots = 0;
+  var logicArrayBot = [];
+  for (let i = 0; i < TsBlocks.length; i++) {
+    if (TsBlocks[i].classList.contains("oTern") && antiside == "circle") {
+      logicArrayBot[i] = "+";
+    } else if (TsBlocks[i].classList.contains("xTern") && antiside == "cross") {
+      logicArrayBot[i] = "+";
+    } else if (TsBlocks[i].classList.contains("oTern") && antiside == "cross") {
+      logicArrayBot[i] = "-";
+    } else if (
+      TsBlocks[i].classList.contains("xTern") &&
+      antiside == "circle"
+    ) {
+      logicArrayBot[i] = "-";
+    } else {
+      logicArrayBot[i] = "0";
+      freeslots += 1;
+    }
+  }
+  return logicArrayBot;
+};
 //Функция вставки знака бота
 var setBotChar = function (numBlock) {
   if (antiside == "cross") {
@@ -178,6 +204,7 @@ var halfmindTern = function (logicArray) {
         miniSuperTurn = miniSuperTurnArray[i];
       } else {
         miniSuperTurn = miniSuperTurnArray[i].substring(1);
+        winPlayer = "lose";
         break;
       }
     }
@@ -193,28 +220,11 @@ var halfmindTern = function (logicArray) {
 var botTernHard = function () {
   //Создаем массив, который будет видеть бот
   let logicArrayBot = [];
-  let freeslots = 0;
   //Он получает "+" - если клетка занята его стороной
   //"-" - если не его стороной
   //"0" - если клетка пуста
   // Генерируем массив значений блока клеток
-  for (let i = 0; i < TsBlocks.length; i++) {
-    if (TsBlocks[i].classList.contains("oTern") && antiside == "circle") {
-      logicArrayBot[i] = "+";
-    } else if (TsBlocks[i].classList.contains("xTern") && antiside == "cross") {
-      logicArrayBot[i] = "+";
-    } else if (TsBlocks[i].classList.contains("oTern") && antiside == "cross") {
-      logicArrayBot[i] = "-";
-    } else if (
-      TsBlocks[i].classList.contains("xTern") &&
-      antiside == "circle"
-    ) {
-      logicArrayBot[i] = "-";
-    } else {
-      logicArrayBot[i] = "0";
-      freeslots += 1;
-    }
-  }
+  logicArrayBot = getValueTable();
   if (freeslots <= 5) {
     winPlayer = winDetected(logicArrayBot);
     console.log(winPlayer);
@@ -223,6 +233,7 @@ var botTernHard = function () {
     let turnTrue = false;
 
     while (turnTrue != true) {
+      //Умный ход
       turnTrue = halfmindTern(logicArrayBot);
       if (turnTrue) {
       }
@@ -230,37 +241,23 @@ var botTernHard = function () {
       if (turnTrue == false) {
         turnTrue = randomTern(logicArrayBot);
       }
-      if (turnTrue) {
-      }
     }
+  }
+  logicArrayBot = getValueTable();
+  if (freeslots <= 5) {
+    winPlayer = winDetected(logicArrayBot);
+    console.log(winPlayer);
   }
 };
 // Ход легкого бота
 var botTernEasy = function () {
   //Создаем массив, который будет видеть бот
   let logicArrayBot = [];
-  let freeslots = 0;
   //Он получает "+" - если клетка занята его стороной
   //"-" - если не его стороной
   //"0" - если клетка пуста
   // Генерируем массив значений блока клеток
-  for (let i = 0; i < TsBlocks.length; i++) {
-    if (TsBlocks[i].classList.contains("oTern") && antiside == "circle") {
-      logicArrayBot[i] = "+";
-    } else if (TsBlocks[i].classList.contains("xTern") && antiside == "cross") {
-      logicArrayBot[i] = "+";
-    } else if (TsBlocks[i].classList.contains("oTern") && antiside == "cross") {
-      logicArrayBot[i] = "-";
-    } else if (
-      TsBlocks[i].classList.contains("xTern") &&
-      antiside == "circle"
-    ) {
-      logicArrayBot[i] = "-";
-    } else {
-      logicArrayBot[i] = "0";
-      freeslots += 1;
-    }
-  }
+  logicArrayBot = getValueTable();
   if (freeslots <= 5) {
     winPlayer = winDetected(logicArrayBot);
     console.log(winPlayer);
@@ -273,9 +270,14 @@ var botTernEasy = function () {
         turnTrue = randomTern(logicArrayBot);
       }
     }
+    logicArrayBot = getValueTable();
+    if (freeslots <= 5) {
+      winPlayer = winDetected(logicArrayBot);
+      console.log(winPlayer);
+    }
   }
 };
-//Функция перебора 3-ел-ов для победы
+//Функция перебора 3-ех ел-ов для победы
 var tripleReseachWin = function (
   num1,
   idElement1,
@@ -288,7 +290,6 @@ var tripleReseachWin = function (
     if (num1 == "-") {
       return "win";
     } else {
-      winPlayer = false;
       return "lose";
     }
   }
@@ -403,6 +404,7 @@ var TsBlockaddListener = function (tBlock) {
     }
   });
 };
+// Цикл задания блоками листенеров
 for (let i = 0; i < TsBlocks.length; i++) {
   TsBlockaddListener(TsBlocks[i]);
 }

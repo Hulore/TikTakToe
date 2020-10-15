@@ -1,0 +1,12 @@
+{
+  "users": [
+    {
+      "login": "Hulore",
+      "password": 123,
+      "winEasyBot": 2,
+      "winHardBot": 5,
+      "loseEasyBot": 1,
+      "loseHardBot": 7
+    }
+  ]
+}

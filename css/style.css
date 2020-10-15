@@ -5,6 +5,9 @@ header .gameTitle {
   margin-top: 30px;
   margin-bottom: 30px;
 }
+body {
+  font-family: "Roboto", sans-serif;
+}
 main {
   display: flex;
   justify-content: space-around;
@@ -15,11 +18,20 @@ main {
   width: 250px;
   height: 400px;
   margin: auto;
+  background-color: #ffffff;
+  border-radius: 5px;
+
+  box-shadow: 0px 0px 10px #000;
 }
 .asidePanelLeft {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+}
+.asidePanelRight {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .tttBlock {
   transition-property: none;
@@ -44,14 +56,13 @@ main {
 }
 .oTern {
   background-image: url(images/o.svg);
-  background-position: -1% 5px;
+  background-position: 5px 5px;
   background-repeat: no-repeat;
 }
 .xTern {
   background-image: url(images/x.svg);
-
   background-repeat: no-repeat;
-  background-position: -1% 5px;
+  background-position: 5px 5px;
 }
 
 .choiceSide {
@@ -67,7 +78,8 @@ main {
 .ofSide {
   min-width: 30px;
   min-height: 40px;
-  border: 2px solid black;
+  border: 1px solid #cccccc;
+  box-shadow: 0px 0px 10px #000;
   vertical-align: middle;
   border-radius: 15%;
   font-size: 25px;
@@ -84,4 +96,125 @@ main {
 }
 .background-choose {
   background-color: goldenrod;
+}
+.b-popup {
+  display: none;
+  width: 100%;
+  min-height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  position: fixed;
+  top: 0px;
+}
+.b-popup .b-popup-content {
+  margin: 140px auto 0px auto;
+  width: 400px;
+  height: auto;
+  background-color: #ffffff;
+  border-radius: 5px;
+
+  box-shadow: 0px 0px 10px #000;
+}
+.b-popup-show {
+  display: block;
+}
+.login-title {
+  font-size: 25px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  text-align: center;
+  width: 400px;
+  height: 50px;
+  padding-top: 20px;
+  background-image: url(images/titleLogBakcground.jpg);
+  background-position: -350px -200px;
+}
+.form-data {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.form-data-block {
+  height: auto;
+}
+.form-data .form-data-block p {
+  font-size: 25px;
+  font-family: "Roboto", sans-serif;
+}
+.form-data input {
+  width: 95%;
+  height: 24px;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  padding: 2px 5px;
+
+  font-family: "Roboto", sans-serif;
+  vertical-align: middle;
+
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+}
+input[type="button"] {
+  width: auto;
+  height: auto;
+  margin: 10px;
+  padding: 6px 15px;
+  margin-bottom: 20px;
+  color: #ffffff;
+
+  background-color: #2c3e50;
+  border: none;
+  border-radius: 5px;
+}
+.rightBoxes {
+  margin: 10px;
+  font-size: 20px;
+  font-weight: 700;
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+}
+.nameBox {
+  border: 2px solid darkgoldenrod;
+  width: auto;
+  height: 10%;
+  padding-top: 20%;
+}
+.userName {
+}
+.statBox {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 30% 70%;
+  padding: 2px;
+}
+.nameStatBox {
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+.statBox > div:not(.nameStatBox) {
+  margin: 0px;
+  border-left: 2px solid grey;
+}
+.textInStatBox {
+  display: grid;
+  grid-template-columns: 70% 30%;
+  grid-template-rows: 30% 35% 35%;
+  font-size: 15px;
+  font-weight: 400;
+}
+.textInStatBox strong {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  margin-bottom: 25px;
+}
+.settingsBox {
+  display: flex;
+  height: 90px;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.settingOption {
+  font-size: 15px;
 }

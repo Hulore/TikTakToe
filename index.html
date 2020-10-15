@@ -16,6 +16,34 @@
       <div class="gameTitle">TikTakToe</div>
     </header>
     <main>
+      <div class="b-popup b-popup-show">
+        <div class="b-popup-content">
+          <div class="login-title">Регистрация/авторизация</div>
+          <div id="" class="form-data">
+            <div id="" class="form-data-block login-block">
+              <p>Логин:</p>
+              <label for="login"></label>
+              <input
+                type="text"
+                id="login"
+                name="login"
+                placeholder="Введите логин"
+              />
+            </div>
+            <div id="" class="form-data-block password-block">
+              <p>Пароль:</p>
+              <label for="password"></label>
+              <input
+                type="password"
+                name="password"
+                placeholder="Введите пароль"
+                id="password"
+              />
+            </div>
+            <input id="enter-button" type="button" value="Войти" />
+          </div>
+        </div>
+      </div>
       <div class="asidePanelLeft">
         <div id="" class="caption">Выбери сторону</div>
         <div id="" class="choiceSide">
@@ -39,9 +67,37 @@
         <div class="tttBlock"></div>
         <div class="tttBlock"></div>
       </div>
-      <div class="asidePanelRight"></div>
+      <div class="asidePanelRight">
+        <div id="" class="rightBoxes nameBox">
+          <div class="userName">Имя пользователя</div>
+        </div>
+        <div id="" class="rightBoxes statBox">
+          <div id="" class="nameStatBox">Стастистика</div>
+          <div id="" class="textInStatBox winner">
+            <strong>Победы:</strong>
+            <div>Easy-bot:</div>
+            <div class="winEasyBot"></div>
+            <div>Hard-bot:</div>
+            <div class="winHardBot"></div>
+          </div>
+          <div id="" class="textInStatBox winner">
+            <strong>Поражения:</strong>
+            <div>Easy-bot:</div>
+            <div class="loseEasyBot"></div>
+            <div>Hard-bot:</div>
+            <div class="loseHardBot"></div>
+          </div>
+        </div>
+        <div id="" class="rightBoxes settingsBox">
+          <div id="" class="">Настройки</div>
+          <div id="" class="settingOption">Сменить логин</div>
+          <div id="" class="settingOption">Сменить пароль</div>
+          <div id="" class="quit">Выйти</div>
+        </div>
+      </div>
     </main>
     <footer></footer>
     <script src="js/scripts.js"></script>
+    <script src="js/logscript.js"></script>
   </body>
 </html>
