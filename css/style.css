@@ -176,6 +176,7 @@ input[type="button"] {
   text-align: center;
 }
 .nameBox {
+  border: 2px solid darkgoldenrod;
   width: auto;
   height: 10%;
   padding-top: 20%;
