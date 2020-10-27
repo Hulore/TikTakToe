@@ -253,11 +253,11 @@ var botTernHard = function () {
   if (freeslots <= 5) {
     winPlayer = winDetected(logicArrayBot);
     console.log(winPlayer);
-    if (winPlayer == "win") {
-      winTable.textContent = "Победа";
-      winTable.classList.remove("hidden-win-table");
-    } else if (winPlayer == "lose") {
+    if (winPlayer == "lose") {
       winTable.textContent = "Поражение";
+      winTable.classList.remove("hidden-win-table");
+    } else if (winPlayer == "win") {
+      winTable.textContent = "Победа";
       winTable.classList.remove("hidden-win-table");
     }
   }
@@ -292,6 +292,18 @@ var botTernEasy = function () {
     if (freeslots <= 5) {
       winPlayer = winDetected(logicArrayBot);
       console.log(winPlayer);
+      if (winPlayer == "lose") {
+        winTable.textContent = "Поражение";
+        winTable.classList.remove("hidden-win-table");
+      } else if (winPlayer == "win") {
+        winTable.textContent = "Победа";
+        winTable.classList.remove("hidden-win-table");
+      }
+    }
+    if (freeslots == 0) {
+      console.log("ничья");
+      winTable.textContent = "Ничья";
+      winTable.classList.remove("hidden-win-table");
     }
   }
 };
