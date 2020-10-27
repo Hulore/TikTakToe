@@ -4,6 +4,7 @@ var crossSide = document.querySelector(".crossSide");
 var circleSide = document.querySelector(".circleSide");
 var easyDif = document.querySelector(".easyDif");
 var hardDif = document.querySelector(".hardDif");
+var resetButton = document.querySelector(".reset-button");
 //Переменная для стороны
 var side;
 var difficult;
@@ -56,6 +57,10 @@ hardDif.addEventListener("click", function () {
       botTernHard();
     }
   }
+});
+//Создаем листенер для кнопки ресета
+resetButton.addEventListener("click", function () {
+  location.reload();
 });
 //Функция получения массива значений крестиков и нольков
 var getValueTable = function () {
