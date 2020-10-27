@@ -393,6 +393,7 @@ var TsBlockaddListener = function (tBlock) {
         tBlock.classList.remove("xTern");
         tBlock.classList.add("oTern");
       } else {
+        alert("Выберите сложность и сторону!");
         console.log("Ошибка");
       }
 
