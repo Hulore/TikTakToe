@@ -5,6 +5,7 @@ var circleSide = document.querySelector(".circleSide");
 var easyDif = document.querySelector(".easyDif");
 var hardDif = document.querySelector(".hardDif");
 var resetButton = document.querySelector(".reset-button");
+var winTable = document.querySelector(".who-is-win");
 //Переменная для стороны
 var side;
 var difficult;
@@ -252,6 +253,18 @@ var botTernHard = function () {
   if (freeslots <= 5) {
     winPlayer = winDetected(logicArrayBot);
     console.log(winPlayer);
+    if (winPlayer == "win") {
+      winTable.textContent = "Победа";
+      winTable.classList.remove("hidden-win-table");
+    } else if (winPlayer == "lose") {
+      winTable.textContent = "Поражение";
+      winTable.classList.remove("hidden-win-table");
+    }
+  }
+  if (freeslots == 0) {
+    console.log("ничья");
+    winTable.textContent = "Ничья";
+    winTable.classList.remove("hidden-win-table");
   }
 };
 // Ход легкого бота
@@ -393,7 +406,11 @@ var TsBlockaddListener = function (tBlock) {
         tBlock.classList.remove("xTern");
         tBlock.classList.add("oTern");
       } else {
-        alert("Выберите сложность и сторону!");
+        if (!winPlayer) {
+          alert("Выберите сложность и сторону!");
+        } else {
+          alert("Игра оконченна!");
+        }
         console.log("Ошибка");
       }
 

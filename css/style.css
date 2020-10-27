@@ -3,7 +3,22 @@ header .gameTitle {
   text-align: center;
   font-size: 50px;
   margin-top: 30px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
+}
+.who-is-win {
+  height: 40px;
+  width: 240px;
+  border: 2px solid rgb(31, 30, 29);
+  background-color: rgb(201, 36, 36);
+  border-radius: 20%;
+  margin: auto;
+  padding-top: 5px;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 600;
+}
+.hidden-win-table {
+  visibility: hidden;
 }
 body {
   font-family: "Roboto", sans-serif;
@@ -78,7 +93,7 @@ main {
 .ofSide {
   min-width: 30px;
   min-height: 40px;
-  border: 1px solid #cccccc;
+
   box-shadow: 0px 0px 10px #000;
   vertical-align: middle;
   border-radius: 15%;
@@ -95,7 +110,7 @@ main {
   font-size: 20px;
 }
 .background-choose {
-  background-color: goldenrod;
+  background-color: rgb(230, 10, 10);
 }
 .b-popup {
   display: none;
