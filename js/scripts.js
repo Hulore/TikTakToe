@@ -389,7 +389,7 @@ var TsBlockaddListener = function (tBlock) {
       if (side === "cross" && difficult && !winPlayer) {
         tBlock.classList.remove("oTern");
         tBlock.classList.add("xTern");
-      } else if (side === "circle" && difficult) {
+      } else if (side === "circle" && difficult && !winPlayer) {
         tBlock.classList.remove("xTern");
         tBlock.classList.add("oTern");
       } else {
